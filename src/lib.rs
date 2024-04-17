@@ -66,6 +66,21 @@ impl QiitaClient {
 
         Ok(res)
     }
+
+    // GET /api/v2/items/:item_id
+    //
+    // Get an item.
+    pub async fn items_by_item_id(item_id: &str) -> reqwest::Result<Item> {
+        let url = format!("{BASE_URL}/items/{item_id}");
+        let res = reqwest::get(url).await?.json::<Item>().await?;
+        // let res = reqwest::get(url).await?;
+
+        // let json = res.text().await?;
+
+        // println!("{:?}", json);
+
+        Ok(res)
+    }
 }
 
 #[cfg(test)]
@@ -84,6 +99,16 @@ mod tests {
     #[tokio::test]
     async fn test_items() {
         let items = QiitaClient::items(1, 20).await.expect("get items");
+
+        println!("{items:?}");
+    }
+
+    #[tokio::test]
+    async fn test_items_by_item_id() {
+        let item_id = "6a121a6027788cd97725";
+        let items = QiitaClient::items_by_item_id(item_id)
+            .await
+            .expect("get items");
 
         println!("{items:?}");
     }
