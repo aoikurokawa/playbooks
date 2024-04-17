@@ -1,7 +1,9 @@
+pub mod error;
 pub mod item;
 pub mod tag;
 pub mod user;
 
+pub use error::*;
 pub use item::Item;
 pub use tag::*;
 pub use user::*;
@@ -72,7 +74,12 @@ impl QiitaClient {
     // Get an item.
     pub async fn items_by_item_id(item_id: &str) -> reqwest::Result<Item> {
         let url = format!("{BASE_URL}/items/{item_id}");
-        let res = reqwest::get(url).await?.json::<Item>().await?;
+        let res = reqwest::get(url).await?;
+
+        match res.json::<Item>().await {
+            Ok(item) => item,
+            Err(e) => res.json::<Item>(),
+        };
         // let res = reqwest::get(url).await?;
 
         // let json = res.text().await?;
