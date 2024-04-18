@@ -1,5 +1,7 @@
+use serde::{Serialize, Deserialize};
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Error {
     message: String,
-    type: String,
+    r#type: String,
 }

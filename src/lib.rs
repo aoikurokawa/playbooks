@@ -57,7 +57,7 @@ impl QiitaClient {
     //         Search query
     //         Example: "qiita user:Qiita"
     //         Type: string
-    pub async fn items(page: u8, per_page: u8) -> reqwest::Result<Vec<Item>> {
+    pub async fn items(_page: u8, _per_page: u8) -> reqwest::Result<Vec<Item>> {
         let url = format!("{BASE_URL}/items");
         let res = reqwest::get(url).await?.json::<Vec<Item>>().await?;
         // let res = reqwest::get(url).await?;
@@ -72,21 +72,15 @@ impl QiitaClient {
     // GET /api/v2/items/:item_id
     //
     // Get an item.
-    pub async fn items_by_item_id(item_id: &str) -> reqwest::Result<Item> {
+    pub async fn items_by_item_id(item_id: &str) -> Result<Item, Error> {
         let url = format!("{BASE_URL}/items/{item_id}");
-        let res = reqwest::get(url).await?;
+        let res = reqwest::get(url).await.expect("get item");
+        let bytes = res.bytes().await.expect("convert to bytes");
 
-        match res.json::<Item>().await {
-            Ok(item) => item,
-            Err(e) => res.json::<Item>(),
-        };
-        // let res = reqwest::get(url).await?;
-
-        // let json = res.text().await?;
-
-        // println!("{:?}", json);
-
-        Ok(res)
+        match serde_json::from_slice::<Item>(&bytes) {
+            Ok(item) => Ok(item),
+            Err(_e) => Err(serde_json::from_slice::<Error>(&bytes).unwrap()),
+        }
     }
 }
 
