@@ -8,9 +8,11 @@ edition = "2021"
 [dependencies]
 clap = { version = "4.5.49", features = ["derive", "env"] }
 solana-client = "3.0.6"
+hex = "0.4"
 reqwest = { version = "0.12.3", features = ["json"] }
 serde = { version = "1.0.198", features = ["derive"] }
 serde_json = "1.0.116"
 tokio = { version = "1.37.0", features = ["full"] }
 solana-pubkey = "3.0.0"
+solana-sdk = "3.0.0"
 indicatif = "0.18.0"
