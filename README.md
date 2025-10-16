@@ -1,4 +1,2 @@
-# Qiita API
+# Stakenet Playbook
 
-## API document
-- https://qiita.com/api/v2/docs#item
