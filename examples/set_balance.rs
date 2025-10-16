@@ -1,11 +1,8 @@
-// Rust CLI tool to set exact balance using Surfpool cheatcodes
-// Usage: cargo run --bin set_balance -- <address> <lamports>
+use std::{env, str::FromStr};
 
 use serde_json::json;
 use solana_client::rpc_client::RpcClient;
-use solana_sdk::pubkey::Pubkey;
-use std::env;
-use std::str::FromStr;
+use solana_pubkey::Pubkey;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<String> = env::args().collect();
@@ -105,54 +102,3 @@ fn set_balance(address: Pubkey, target_lamports: u64) -> Result<(), Box<dyn std:
 
     Ok(())
 }
-
-// For integration into existing code:
-// #[allow(dead_code)]
-// pub fn set_account_balance(
-//     address: Pubkey,
-//     lamports: u64,
-// ) -> Result<(), Box<dyn std::error::Error>> {
-//     let client = RpcClient::new("http://127.0.0.1:8899".to_string());
-//
-//     // Get current account to preserve data
-//     let account = client.get_account(&address)?;
-//
-//     let params = json!([
-//         address.to_string(),
-//         {
-//             "lamports": lamports,
-//             "data": account.data,
-//             "owner": account.owner.to_string(),
-//             "executable": account.executable,
-//             "rentEpoch": account.rent_epoch,
-//         }
-//     ]);
-//
-//     client.send(
-//         solana_client::rpc_request::RpcRequest::Custom {
-//             method: "surfnet_setAccount",
-//         },
-//         params,
-//     )?;
-//
-//     Ok(())
-// }
-//
-// #[cfg(test)]
-// mod tests {
-//     use super::*;
-//
-//     #[test]
-//     #[ignore] // Run with: cargo test -- --ignored
-//     fn test_set_balance() {
-//         let address = Pubkey::from_str("BgKUXdS29YcHCFrPm5M8oLHiTzZaMDjsebggjoaQ6KFL").unwrap();
-//
-//         // Set to 1000 SOL
-//         set_account_balance(address, 1_000_000_000_000).unwrap();
-//
-//         // Verify
-//         let client = RpcClient::new("http://127.0.0.1:8899".to_string());
-//         let balance = client.get_balance(&address).unwrap();
-//         assert_eq!(balance, 1_000_000_000_000);
-//     }
-// }
