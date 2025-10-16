@@ -78,3 +78,9 @@
 [2025-10-16--16-52-30 INFO actix_web::middleware::logger] 127.0.0.1 "GET /_next/static/chunks/5083.d5e53186add8ff60.js HTTP/1.1" 200 41053 "http://127.0.0.1:18488/_next/static/chunks/5387.2ecb57e8a3ef981c.js" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101 Firefox/144.0" 0.002827
 [2025-10-16--16-52-32 INFO actix_web::middleware::logger] 127.0.0.1 "GET /index.txt?_rsc=114vl HTTP/1.1" 200 1702 "http://127.0.0.1:18488/subgraphs" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101 Firefox/144.0" 0.000493
 [2025-10-16--16-52-32 INFO actix_web::middleware::logger] 127.0.0.1 "GET /favicon.ico HTTP/1.1" 200 1748 "http://127.0.0.1:18488/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101 Firefox/144.0" 0.000152
+[2025-10-16--17-48-04 INFO actix_server::worker] shutting down idle worker
+[2025-10-16--17-48-04 INFO actix_server::worker] shutting down idle worker
+[2025-10-16--17-48-04 INFO actix_server::worker] shutting down idle worker
+[2025-10-16--17-48-04 INFO actix_server::worker] shutting down idle worker
+[2025-10-16--17-48-04 INFO actix_server::worker] shutting down idle worker
+[2025-10-16--17-48-04 INFO actix_server::accept] accept thread stopped
